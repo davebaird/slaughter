@@ -23,7 +23,7 @@ Contributions
    - Diagnosed issue with template expansion causing file comparisions to always fail.
 
   Jason J. Rodrigues
-   - Added --no-log option.
+   - Added --no-log option.  (Obsolete in 2.x).
 
   CSILLAG Tamas
    - Implemented --agent.
