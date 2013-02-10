@@ -199,7 +199,7 @@ A fully-featured file might look something like this:
 
 =head1 LICENSE
 
-Copyright (c) 2010-2012 by Steve Kemp.  All rights reserved.
+Copyright (c) 2010-2013 by Steve Kemp.  All rights reserved.
 
 This module is free software;
 you can redistribute it and/or modify it under
@@ -214,9 +214,9 @@ use warnings;
 
 use English;
 use File::Basename qw! basename !;
-use File::Path qw/ mkpath /;
+use File::Path qw! mkpath !;
 use File::Spec;
-use File::Temp qw/ tempfile tempdir /;
+use File::Temp qw! tempfile tempdir !;
 use Getopt::Long;
 use POSIX;
 use Pod::Usage;
