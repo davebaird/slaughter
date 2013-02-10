@@ -25,7 +25,7 @@ The tasks we support are pretty basic, but they include:
    6.  Checking disk space, and mount-points.
    7.  Sending alerts via email.
 
-The implementation is cleanly organized to allow it to be ported, tested,
+The implementation is cleanly organised to allow it to be ported, tested,
 and used upon new systems easily.  Currently we support:
 
    * GNU/Linux.
