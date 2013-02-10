@@ -10,7 +10,7 @@
 #  Only used to build distribution tarballs.
 #
 DIST_PREFIX = ${TMP}
-VERSION     = 2.5
+VERSION     = 2.6
 BASE        = slaughter
 
 #

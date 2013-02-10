@@ -1,3 +1,10 @@
+slaughter2 (2.6-1) stable; urgency=low
+
+  * New command line option "role" which will be used in file-fetches.
+  * New meta-information variables, relating to day of week and hour of day.
+
+ -- Steve Kemp <steve@steve.org.uk>  Sun, 10 Feb 2013 12:13:14 +0000
+
 slaughter2 (2.5-1) stable; urgency=low
 
   * The git/rsync/svn/etc transports are quiet by default.
