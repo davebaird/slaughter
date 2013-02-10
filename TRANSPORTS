@@ -1,21 +1,27 @@
 
-Slaughter fetches policies, and optionally files, from a remote server.
-The remote server might be :
+About Transports
+-----------------
 
-    * An rsync server.
-    * HTTP/HTTPS server.
-    * Remote git/mercurial/subversion repository.
+When the slaughter client is launched it will fetch policies from a
+central server.  (Depending upon your configuration it may also
+fetch modules and files.)
 
-Additionally there is a NOP-transport which fetches files from the local
-filesystem, and requires no central server.  This is the "local" transport.
+The remote server might be a host :
 
-To specify which of these transports is used the slaughter client needs to be
-configured with two things:
+    * Running an rsync server.
+    * Running a HTTP/HTTPS server.
+    * Hosting a git/mercurial/subversion repository.
 
-    * The method by which to fetch the files (HTTP-get, rsync clone, etc).
-    * The location of the files.
+Each of these file-transfer options is known as a "transport" in
+Slaughter.
 
-The former is the "transport", the latter is the "server-prefix".
+When the client is launched you'll need to specify two things:
+
+    * The prefix of the location from which the files/modules/polices
+      are to be fetched - this is the server-prefix.
+    * The method by which to fetch the files (HTTP-fetch, rsync clone, etc).
+      This is the transport.
+
 
 
 
@@ -23,14 +29,14 @@ local transport
 ---------------
 
 The local-transport allows you to test against policies upon the local disk,
-without any remote fetching at all.  This is sufficient for testing purposes
+without any remote host being involved.  This is sufficient for testing purposes
 and to allow you to get your feet wet.
 
 Assuming you have the layout:
 
-   /root/tmp/
    /root/slaughter/
    /root/slaughter/files/
+   /root/slaughter/modules/
    /root/slaughter/policies/
    /root/slaughter/policies/default.policy
 
@@ -51,6 +57,7 @@ Given this directory tree:
 
     /var/www/slaughter/
     /var/www/slaughter/files/
+    /var/www/slaughter/modules/
     /var/www/slaughter/policies/
     /var/www/slaughter/policies/default.policy
 
@@ -58,7 +65,9 @@ Then the client will be invoked like this:
 
     slaughter --transport=http --prefix=http://example.com/slaughter/
 
-Here the prefix is the URL which contains the sub-directories "files" and "policies".
+Here the prefix is the URL which contains the top-level directories
+"files", "modules", and "policies".
+
 You can test the transfer by running a command such as this:
 
     curl http://example.com/slaughter/policies/default.policy
@@ -69,26 +78,27 @@ You can test the transfer by running a command such as this:
 rsync transport
 ---------------
 
-rsync is an efficient protocol for transferring files, coping well with incremental
-fetches.
+rsync is an efficient protocol for transferring files, coping well
+with incremental fetches.
 
 Assuming the files are stored on the disk like this:
 
     /srv/slaughter/
     /srv/slaughter/files/
+    /srv/slaughter/modules/
     /srv/slaughter/policies/
     /srv/slaughter/policies/default.policy
 
 
-The following rsync configuration file would be a sensible starting point, note
-especially how it uses an ACL to prevent fetches from unknown machines:
+The following rsync configuration file would be a sensible starting point.
+
+NOTE: An ACL to prevent fetches from unknown machines is recommended:
 
     [slaughter]
         path = /srv/slaughter/
         comment = slaughter policy files
         read only = true
         hosts allow = 1.2.3.0/24 *.example.com
-
 
 The client will be invoked as follows:
 
@@ -106,9 +116,9 @@ Additional arguments may be passed to rsync via the "--transport-args" flag.
 hg transport
 ------------
 
-Create a repository which contains the top-level directories "files/" and
-"policies/".  Host this repository somewhere that mercurial can pull it from,
-ideally via http/https.
+Create a repository which contains the top-level directories "files/",
+"modules/", and "policies/".  Host this repository somewhere that
+mercurial can pull it from, ideally via http/https.
 
 The client will be invoked like so:
 
@@ -127,9 +137,9 @@ Additional arguments may be passed to mercurial via the "--transport-args" flag.
 git transport
 -------------
 
-Create a repository which contains the top-level directories "files/" and
-"policies/".  Host this repository somewhere that git can pull it from,
-ideally via http/https.
+Create a repository which contains the top-level directories "files/",
+"modules/", and "policies/".  Host this repository somewhere that git can
+pull it from, ideally via http/https.
 
 The client will be invoked:
 
@@ -140,7 +150,8 @@ test the path is correct:
 
      git clone http://example.com/path/to/repo.hg /tmp/foo
 
-Additional arguments may be passed to the git command line via the "--transport-args" flag.
+Additional arguments may be passed to the git command line via
+the "--transport-args" flag.
 
 
 
