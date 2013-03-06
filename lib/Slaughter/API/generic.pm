@@ -137,16 +137,16 @@ sub Alert
     my $from     = $params{ 'From' }     || "root";
     my $sendmail = $params{ 'Sendmail' } || "/usr/lib/sendmail -t";
 
-    open( SENDMAIL, "|$sendmail -f $from" ) or
-      return;
-    print SENDMAIL <<EOF;
+    open( my $handle, "|-", "$sendmail -f $from" ) or
+      die "Failed to sendmail: $!";
+    print $handle <<EOF;
 To: $to
 From: $from
 Subject: $subject
 
 $message
 EOF
-    close(SENDMAIL);
+    close($handle);
 
 }
 
