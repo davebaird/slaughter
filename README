@@ -137,7 +137,7 @@ serve a tree which would look like this:
            /var/www/slaughter/policies/
            /var/www/slaughter/files/
 
-Here we see there are two specific directories:
+Here we see there are three specific directories:
 
   modules/
     This is the location of any modules which are implemented.
