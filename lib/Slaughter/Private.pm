@@ -35,6 +35,9 @@ The LICENSE file contains the full text of the license.
 =cut
 
 
+use strict;
+use warnings;
+
 
 
 =head2 fetchFromTransport
@@ -65,6 +68,9 @@ sub fetchFromTransport
 
     $::template{ 'verbose' } && print "\tfetchFromTransport( $url ) \n";
 
+    my $content = undef;
+
+
     #
     #  Make requests for:
     #
@@ -90,7 +96,7 @@ sub fetchFromTransport
 
     foreach my $attempt (@urls)
     {
-        my $content =
+        $content =
           $::TRANSPORT->fetchContents( prefix => "/files/",
                                        file   => $attempt );
 
@@ -111,7 +117,7 @@ sub fetchFromTransport
     #
     $::template{ 'verbose' } &&
       print "\tFailed to fetch any of our attempts for $url\n";
-    return undef;
+    return $content;
 }
 
 
