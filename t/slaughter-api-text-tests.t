@@ -37,14 +37,15 @@ is( -s $filename, 0, "The file is empty" );
 #
 #  Write out known-contents to the file
 #
-open( FILE, ">", $filename ) or die "Failed to write to temporary file: $!";
-print FILE <<EOF;
+open( my $handle, ">", $filename ) or
+  die "Failed to write to temporary file: $!";
+print $handle <<EOF;
 Steve
 Kemp
 1234567890
 ABCDEFGHI
 EOF
-close(FILE);
+close($handle);
 
 #
 #  File contents are known, so size is known

@@ -45,9 +45,12 @@ is( countFiles($dir), 4, "The temporary directory has now been populated" );
 #
 #  The files should be identical.
 #
-ok( IdenticalContents( File1 => "$dir/foo.txt",
-                       File2 => "$dir/bar.txt" ),
-    "The files are identical" );
+ok(
+    IdenticalContents( File1 => "$dir/foo.txt",
+                       File2 => "$dir/bar.txt"
+                     ),
+    "The files are identical"
+  );
 
 #
 #  Set the permissions to be executable
@@ -120,24 +123,30 @@ is( countFiles($dir), 1, "The temporary directory now has one  file left" );
 #  Now we've removed "b*" the file bar.txt will not exist, so the
 # identical content test will fail.
 #
-ok( -1 == IdenticalContents( File1 => "$dir/foo.txt",
-                       File2 => "$dir/bar.txt" ),
-    "File equality test failed when a target is not present." );
+ok(
+    -1 == IdenticalContents( File1 => "$dir/foo.txt",
+                             File2 => "$dir/bar.txt"
+                           ),
+    "File equality test failed when a target is not present."
+  );
 
 
 #
 #  Now create a dissimiliar file.
 #
-createFile( $dir, "bar.txt" , "Some random content" );
-ok(  0 == IdenticalContents( File1 => "$dir/foo.txt",
-                       File2 => "$dir/bar.txt" ),
-    "File equality test failed as expected." );
+createFile( $dir, "bar.txt", "Some random content" );
+ok(
+    0 == IdenticalContents( File1 => "$dir/foo.txt",
+                            File2 => "$dir/bar.txt"
+                          ),
+    "File equality test failed as expected."
+  );
 
 
 #
 #  Delete the newly re-created file.
 #
-unlink( "$dir/bar.txt" );
+unlink("$dir/bar.txt");
 
 #
 #  Unlink the last file manually
@@ -156,9 +165,10 @@ sub createFile
 
     $contents = "OK\n" if ( !defined($contents) );
 
-    open( FILE, ">", "$dir/$file" );
-    print FILE $contents;
-    close(FILE);
+    open( my $handle, ">", "$dir/$file" ) or
+      die "Failed to create $dir/$file - $!";
+    print $handle $contents;
+    close($handle);
 }
 
 

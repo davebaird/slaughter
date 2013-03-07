@@ -42,6 +42,7 @@ ok( -d $base, "The library directory exists." );
 #
 foreach my $dir ( sort( glob( $base . "/*/" ) ) )
 {
+
     #
     # skip the API directory for the moment, because
     # the crusty way we implement insertion into the
@@ -53,15 +54,15 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
     # even though there is no base/derived relationship
     # between them.
     #
-    next if ($dir =~ /API/);
+    next if ( $dir =~ /API/ );
 
-    ok( -d $dir , " Found subdirectory: $dir" );
+    ok( -d $dir, " Found subdirectory: $dir" );
 
     #
     #  Look for the API file
     #
     my $api = $dir . "API";
-    ok( -e $api , "Found corresponding API file: $api" );
+    ok( -e $api, "Found corresponding API file: $api" );
 
     #
     #  Count the subroutines named in the API file
@@ -75,33 +76,34 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
     my %API;
     my %OPTIONAL;
 
-    open( my $handle, "<", $api )
-      or die "Failed to open $api - $!";
-    while( my $line = <$handle> )
+    open( my $handle, "<", $api ) or
+      die "Failed to open $api - $!";
+    while ( my $line = <$handle> )
     {
-        chomp( $line );
+        chomp($line);
         if ( $line =~ /^([_a-zA-Z]+)/ )
         {
-            $API{$1} = 1;
+            $API{ $1 } = 1;
             ok( $1, "\tAPI documents function: $1" );
         }
         if ( $line =~ /^([_a-zA-Z]+) optional/ )
         {
-            $OPTIONAL{$1} = 1;
+            $OPTIONAL{ $1 } = 1;
             ok( $1, "\tAPI optional function: $1" );
         }
     }
-    close( $handle );
+    close($handle);
 
     #
     #  Now ensure that each function is implemented
     #
     foreach my $pm ( sort( glob( $dir . "*.pm" ) ) )
     {
+
         #
         #  We found a library.
         #
-        ok( -e $pm , "Found library: $pm" );
+        ok( -e $pm, "Found library: $pm" );
 
 
         #
@@ -122,9 +124,9 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
         #
         #  Open the library.
         #
-        open( my $handle, "<", $pm )
-          or die "Failed open library file $pm - $!";
-        while( my $line = <$handle> )
+        open( my $handle, "<", $pm ) or
+          die "Failed open library file $pm - $!";
+        while ( my $line = <$handle> )
         {
             chomp $line;
 
@@ -147,6 +149,7 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
                 #
                 if ( $sub !~ /^_/ )
                 {
+
                     #
                     #  OK we have a subroutine in the library.
                     #
@@ -155,12 +158,13 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
                     #
                     #  Additional/Local/Private methods must be prefixed with "_".
                     #
-                    ok( $EXPECTED{$sub}, "The subroutine $sub is required and present" );
-                    delete $EXPECTED{$sub};
+                    ok( $EXPECTED{ $sub },
+                        "The subroutine $sub is required and present" );
+                    delete $EXPECTED{ $sub };
                 }
             }
         }
-        close( $handle );
+        close($handle);
 
         #
         #  At this point we've deleted all the functions we found that
@@ -169,29 +173,29 @@ foreach my $dir ( sort( glob( $base . "/*/" ) ) )
         #  However it might not be if the class is a derived one - because
         # the derived class might assume the parent implements them.
         #
-        next if ( $derived );
+        next if ($derived);
 
         #
         #  Handle any optional functions.
         #
         foreach my $key ( keys %OPTIONAL )
         {
-            if ( $EXPECTED{$key} )
+            if ( $EXPECTED{ $key } )
             {
                 ok( 1, "Optional function present: $key" );
             }
-            delete $EXPECTED{$key};
+            delete $EXPECTED{ $key };
         }
 
 
-        is( scalar %EXPECTED, 0, "There were no functions left over!");
+        is( scalar %EXPECTED, 0, "There were no functions left over!" );
 
         #
         #  Error on the functions that were missing.
         #
         foreach my $key ( keys %EXPECTED )
         {
-            ok( ! $key, "Function $key not found in $pm " );
+            ok( !$key, "Function $key not found in $pm " );
         }
     }
 }

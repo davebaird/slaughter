@@ -22,5 +22,7 @@ require_ok('Config');
 
 
 ok( %Config, "The config hash is available" );
-ok( $Config{'vendorlib'}, "The vendor-lib path is defined: $Config{'vendorlib'}" );
-ok( -d $Config{'vendorlib'}, "The vendor-lib path is a directory that exists" );
+ok( $Config{ 'vendorlib' },
+    "The vendor-lib path is defined: $Config{'vendorlib'}" );
+ok( -d $Config{ 'vendorlib' },
+    "The vendor-lib path is a directory that exists" );

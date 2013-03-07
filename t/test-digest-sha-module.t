@@ -36,8 +36,10 @@ is( -s $filename, 0, "The file is empty" );
 #
 #  Create some stub content
 #
-open( FILE, ">", $filename );
-print FILE<<EOF;
+open( my $handle, ">", $filename ) or
+  die "Failed to open $filename - $!";
+
+print $handle <<EOF;
 Steve Kemp Testing Hashes.
 Hashes are nice.   They're like signatures.
 But less messy.
@@ -45,7 +47,7 @@ But less messy.
 (No ink!)
 
 EOF
-close(FILE);
+close($handle);
 
 #
 #  OK run a sanity check
@@ -71,13 +73,16 @@ foreach my $module (qw! Digest::SHA Digest::SHA1 !)
     #  Attempt to load the module
     #
     my $eval = "use $module;";
+    ## no critic (Eval)
     eval($eval);
+    ## use critic
 
     #
     #  Skip this modning if we failed.
     #
-    if ( $@ )
+    if ($@)
     {
+
         #
         #  NOTE:  This should be "0" rather than "1".
         #
@@ -95,7 +100,8 @@ foreach my $module (qw! Digest::SHA Digest::SHA1 !)
     #  Hash the file
     #
     my $hash = $module->new;
-    open my $handle, "<", $filename;
+    open( my $handle, "<", $filename ) or
+      die "Failed to open $filename - $!";
     $hash->addfile($handle);
     close($handle);
 

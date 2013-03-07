@@ -64,7 +64,7 @@ foreach my $name ( sort( glob( $dir . "/*.pm" ) ) )
         # Test that our required methods are present
         #
         foreach my $method (
-                   qw! isInstalled recognised removePackage installPackage new !)
+                  qw! isInstalled recognised removePackage installPackage new !)
         {
             ok( UNIVERSAL::can( $handle, $method ),
                 "required method available - $method" );

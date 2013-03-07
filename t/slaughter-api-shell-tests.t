@@ -67,7 +67,8 @@ ok( -s $filename, "Our output file grew - showing an error" );
 open( my $file, "<", $filename );
 while ( my $line = <$file> )
 {
-    ok( $line =~ /(no such file|not found)/i, "Output file contained an error" );
+    ok( $line =~ /(no such file|not found)/i,
+        "Output file contained an error" );
 }
 close($file);
 
