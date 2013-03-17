@@ -20,6 +20,8 @@ Description: Automation tool to perform system administration remotely
  .
   * HTTP
  .
+  * Local filesystem access.
+ .
   * rsync
  .
   * Git/Mercurial/Subversion
