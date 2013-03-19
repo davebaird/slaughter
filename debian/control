@@ -5,6 +5,7 @@ Maintainer: Steve Kemp <steve@steve.org.uk>
 Build-Depends: debhelper (>> 5.0.0), libwww-perl | libmojolicious-perl (>> 2.98) , libdigest-sha-perl | libdigest-sha1-perl, perl-modules (>> 5.10.1~rc2-1) | libparent-perl, libtext-template-perl
 Standards-Version: 3.9.1
 Homepage: http://www.steve.org.uk/Software/slaughter/
+Vcs-Browser: https://github.com/skx/slaughter
 
 
 Package: slaughter2-client
