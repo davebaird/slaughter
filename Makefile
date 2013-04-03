@@ -9,9 +9,9 @@
 #
 #  Only used to build distribution tarballs.
 #
-DIST_PREFIX = ${TMP}
-VERSION     = 2.6
 BASE        = slaughter
+DIST_PREFIX = ${TMP}
+VERSION     = $(shell sh -c 'git describe --abbrev=0 --tags | tr -d "release-"')
 
 #
 #  Where we install the modules we provide, the binaries, and the config directory.
