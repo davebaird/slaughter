@@ -133,7 +133,7 @@ sub Alert
 
     my $message  = $params{ 'Message' }  || "No message";
     my $subject  = $params{ 'Subject' }  || "No subject";
-    my $to       = $params{ 'Email' }    || "root";
+    my $to       = $params{ 'To' }       || $params{ 'Email' } || "root";
     my $from     = $params{ 'From' }     || "root";
     my $sendmail = $params{ 'Sendmail' } || "/usr/lib/sendmail -t";
 
