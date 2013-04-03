@@ -133,11 +133,11 @@ serve a tree which would look like this:
 Here we see there are three specific directories:
 
 * `modules/`
-** This is the location of any modules which are implemented.
+   * This is the location of any modules which are implemented.
 * `policies/`
-** This is the location of the policies.
+   * This is the location of the policies.
 * `files/`
-** This is the root of any files which are stored on the server to be fetched.
+   * This is the root of any files which are stored on the server to be fetched.
 
 e.g. The request for `http://$master/slaughter/policies/default.policy` should
 succeed.
