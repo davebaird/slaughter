@@ -77,17 +77,15 @@ use the primitives that Slaughter provides.
 It is expected that because the file default.policy is fetched by all clients
 it should be used for house-keeping, and merely include other policies.
 
-For example a default.policy file might look like this:
+For example a `default.policy` file might look like this:
 
----
 
-# actions to carry out globally
-FetchPolicy "global.policy";
+    # actions to carry out globally
+    FetchPolicy "global.policy";
 
-# is there a per-client one?
-FetchPolicy "$fqdn.policy";
+    # is there a per-client one?
+    FetchPolicy "$fqdn.policy";
 
-----
 
 In this case the variable "fqdn" is expanded to the fully-qualified
 domain-name of the requesting client - this is an example of one of the
@@ -104,9 +102,8 @@ Client Layout
 
 To get started a client needs to have :
 
-  a.  The slaughter-client package installed upon it.
-  b.  The name of the server, and the transport to use against it, stored
-     in the configuration file /etc/slaughter/slaughter.conf [*]
+* The slaughter-client package installed upon it.
+* The name of the server, and the transport to use against it, stored in the configuration file /etc/slaughter/slaughter.conf [*]
 
 Once this is done cron may be used to ensure that /sbin/slaughter is invoked
 upon a regular basis.  (Hourly is a good choice.)
@@ -114,8 +111,7 @@ upon a regular basis.  (Hourly is a good choice.)
 You'll probably want to invoke slaughter manually for the first few times
 as you're putting together your policies.
 
-  [*] - Alternatively you may specify these details on the command line.
-        See the TRANSPORT file for some examples.
+> Alternatively you may specify these details on the command line.  See the TRANSPORT file for some examples.
 
 
 
@@ -136,14 +132,14 @@ serve a tree which would look like this:
 
 Here we see there are three specific directories:
 
-  modules/
-    This is the location of any modules which are implemented.
-  policies/
-    This is the location of the policies.
-  files/
-    This is the root of any files which are stored on the server to be fetched.
+* `modules/`
+** This is the location of any modules which are implemented.
+* `policies/`
+** This is the location of the policies.
+* `files/`
+** This is the root of any files which are stored on the server to be fetched.
 
-e.g. The request for http://$master/slaughter/policies/default.policy should
+e.g. The request for `http://$master/slaughter/policies/default.policy` should
 succeed.
 
 In the interests of security it is probably wise to limit access to the
