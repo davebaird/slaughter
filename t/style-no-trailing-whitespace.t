@@ -47,7 +47,7 @@ sub checkFile
 
     # Read the file.
     open( my $handle, "<", $file ) or
-      die "Failed to open $file - $!";
+      die "Failed to read $file - $!";
     foreach my $line (<$handle>)
     {
         if ( ( $line =~ /\/bin\/sh/ ) ||
@@ -87,9 +87,9 @@ sub countTrailing
     my ($file) = (@_);
     my $count = 0;
 
-    open( FILE, "<", $file ) or
+    open( my $handle, "<", $file ) or
       die "Cannot open $file - $!";
-    foreach my $line (<FILE>)
+    foreach my $line (<$handle>)
     {
 
         # If we found a line with any then increase the count by one
@@ -99,7 +99,7 @@ sub countTrailing
             $count += 1;
         }
     }
-    close(FILE);
+    close($handle);
 
     return ($count);
 }

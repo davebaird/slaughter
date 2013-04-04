@@ -41,6 +41,10 @@ clean:
 	-rm ./slaughter.1 || true
 
 
+critic:
+	perlcritic ./bin/slaughter ./t/*.t || true
+
+
 tidy:
 	perltidy ./bin/slaughter $$(find . -name '*.pm' -print) || true
 
