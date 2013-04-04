@@ -54,7 +54,9 @@ This is nasty.
 
 sub import
 {
+    ## no critic
     no strict 'refs';
+    ## use critic
 
     my $caller = caller;
 
