@@ -42,7 +42,7 @@ clean:
 
 
 critic:
-	perlcritic ./bin/slaughter ./t/*.t || true
+	perlcritic ./bin/slaughter $$(find . -name '*.pm' -print | grep -v modules/ )  ./t/*.t || true
 
 
 tidy:
