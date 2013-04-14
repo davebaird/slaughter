@@ -38,6 +38,10 @@ The LICENSE file contains the full text of the license.
 =cut
 
 
+use strict;
+use warnings;
+
+
 package Slaughter::API::generic;
 
 
@@ -721,7 +725,7 @@ sub FetchFile
           Text::Template->new( TYPE   => 'string',
                                SOURCE => $content );
 
-        $content = $template->fill_in( HASH    => \%template,
+        $content = $template->fill_in( HASH    => \%::template,
                                        PACKAGE => "main", );
 
         if ( !$content )
@@ -956,16 +960,18 @@ sub FindBinary
       $params{ 'path' } ||
       $ENV{ 'PATH' } ||
       "/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin";
+    my $result = undef;
+
 
     foreach my $dir ( split( /:/, $path ) )
     {
-        if ( ( -d $dir ) && ( -x ( $dir . "/" . $binary ) ) )
+        if ( ( -d $dir ) && ( -x ( $dir . "/" . $binary ) ) && ( !$result ) )
         {
-            return $dir . "/" . $binary;
+            $result = $dir . "/" . $binary;
         }
     }
 
-    return undef;
+    $result;
 }
 
 
@@ -1548,10 +1554,10 @@ sub UserDetails
     my ( $name, $pwcode, $uid, $gid, $quota, $comment, $gcos, $home, $logprog )
       = getpwnam( $params{ 'User' } );
 
-    if ( !defined($name) )
-    {
-        return undef;
-    }
+    #
+    #  This is undef.
+    #
+    return $name if ( !defined($name) );
 
     #
     #  Return the values as a hash
