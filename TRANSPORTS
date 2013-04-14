@@ -12,13 +12,13 @@ The remote server might be a host :
     * Running a HTTP/HTTPS server.
     * Hosting a git/mercurial/subversion repository.
 
-Each of these file-transfer options is known as a "transport" in
-Slaughter.
+Each of these file-transfer methods is known as a "transport" in Slaughter.
 
 When the client is launched you'll need to specify two things:
 
-    * The prefix of the location from which the files/modules/polices
-      are to be fetched - this is the server-prefix.
+    * The location from which the files/modules/polices are to be fetched,
+      this is the server-prefix.
+
     * The method by which to fetch the files (HTTP-fetch, rsync clone, etc).
       This is the transport.
 
