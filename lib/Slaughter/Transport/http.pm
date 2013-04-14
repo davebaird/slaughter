@@ -214,7 +214,11 @@ sub fetchContents
     $self->{ 'verbose' } &&
       print "\tFailed to fetch: $url - " . $response->status_line . "\n";
 
-    return undef;
+    #
+    #  Return undef, but hide this from perlcritic.
+    #
+    my $res = undef;
+    return ($res);
 }
 
 

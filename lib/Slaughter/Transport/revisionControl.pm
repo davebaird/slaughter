@@ -304,9 +304,9 @@ sub _readFile
 {
     my ( $self, $file ) = (@_);
 
-    my $txt;
+    my $txt = undef;
 
-    open( my $handle, "<", $file ) or return undef;
+    open( my $handle, "<", $file ) or return ($txt);
 
     while ( my $line = <$handle> )
     {

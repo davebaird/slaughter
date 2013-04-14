@@ -217,7 +217,12 @@ sub fetchContents
       print $code ? "\tFailed to fetch: $url - $code response: $err\n" :
                     "Connection error: $err\n";
 
-    return undef;
+    #
+    #  Return undef, but hide this from perlcritic.
+    #
+    my $res = undef;
+    return ($res);
+
 }
 
 
