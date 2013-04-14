@@ -35,6 +35,10 @@ The LICENSE file contains the full text of the license.
 =cut
 
 
+use strict;
+use warnings;
+
+
 package Slaughter::Packages::linux;
 
 
@@ -102,7 +106,7 @@ sub recognised
         return ("apt-get");
     }
 
-    return undef;
+    return 0;
 }
 
 
@@ -123,7 +127,7 @@ sub isInstalled
     #  Get the type of the system, to make sure we can continue.
     #
     my $type = $self->recognised();
-    return 0 unless ( defined($type) );
+    return 0 unless ($type);
 
     #
     #  Is this apt-based?
@@ -198,7 +202,7 @@ sub installPackage
     #  Get the type of the system, to make sure we can continue.
     #
     my $type = $self->recognised();
-    return 0 unless ( defined($type) );
+    return 0 unless ($type);
 
     #
     #  Is this apt-based?
@@ -238,7 +242,7 @@ sub removePackage
     #  Get the type of the system, to make sure we can continue.
     #
     my $type = $self->recognised();
-    return 0 unless ( defined($type) );
+    return 0 unless ($type);
 
     #
     #  Is this apt-based?
