@@ -37,6 +37,10 @@ The LICENSE file contains the full text of the license.
 =cut
 
 
+use strict;
+use warnings;
+
+
 package Slaughter::API::MSWin32;
 
 
@@ -135,6 +139,7 @@ sub FindBinary
     my $path = $params{ 'Path' } ||
       $params{ 'path' } ||
       $ENV{ 'PATH' };
+    my $result = undef;
 
     foreach my $dir ( split( /;/, $path ) )
     {
@@ -156,7 +161,7 @@ sub FindBinary
         }
     }
 
-    return undef;
+    return $result;
 }
 
 

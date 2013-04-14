@@ -38,6 +38,9 @@ The LICENSE file contains the full text of the license.
 =cut
 
 
+use strict;
+use warnings;
+
 
 package Slaughter::API::openbsd;
 
@@ -286,12 +289,20 @@ You may optionally specify the GCos field to use.
 sub UserCreate
 {
     my (%params) = (@_);
-    if ( !defined( $params{ 'Login' } ) or
-         !defined( $params{ 'UID' } ) or
-         !defined
-         ( $params{ 'GID' } ) )
+
+    #
+    #  Ensure we have the variables we need.
+    #
+    foreach my $variable (qw! Login UID GID !)
     {
-        return undef;
+        if ( !defined( $params{ $variable } ) )
+        {
+
+            #
+            #  Return undef..
+            #
+            return ( $params{ $variable } );
+        }
     }
 
     #
