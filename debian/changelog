@@ -1,3 +1,13 @@
+slaughter2 (2.7-1) stable; urgency=low
+
+  * New release:
+    - Code-cleanups.
+    - Minor documentation fixes.
+    - Test-suite updates.
+    - Now packages build for lenny, squeeze & wheezy.
+
+ -- Steve Kemp <steve@steve.org.uk>  Fri, 19 Apr 2013 22:00:22 +0000
+
 slaughter2 (2.6-1) stable; urgency=low
 
   * New command line option "role" which will be used in file-fetches.
