@@ -85,7 +85,7 @@ uninstall:
 	rm -rf $(ETC_PREFIX)/slaughter
 
 
-release: tidy clean pod
+release: tidy clean 
 	rm -rf $(DIST_PREFIX)/$(BASE)-$(VERSION)
 	rm -f $(DIST_PREFIX)/$(BASE)-$(VERSION).tar.gz
 	cp -R . $(DIST_PREFIX)/$(BASE)-$(VERSION)
