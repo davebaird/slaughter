@@ -166,7 +166,7 @@ sub getInformation
     $ref->{ 'xen' } = 1 if -d "/proc/xen/capabilities";
 
     #
-    #  Detect virtualized CPU, as well as processor counts.
+    #  Detect virtualized CPU, as well as processor count, and architecture.
     #
     if ( open( my $cpu, "<", "/proc/cpuinfo" ) )
     {
@@ -185,10 +185,44 @@ sub getInformation
             {
                 $ref->{ 'cpu_count' } = $1 if ( $ref->{ 'cpu_count' } < $1 );
             }
+            if ( $line =~ /flags\s+:(.*)/ )
+            {
+                my $flags = $1;
+                if ( $flags =~/lm/ )
+                {
+                    $ref->{ 'arch' } = "amd64";
+                    $ref->{ 'bits' } = 64;
+                }
+                else
+                {
+                    $ref->{ 'arch' } = "i386";
+                    $ref->{ 'bits' } = 32;
+                }
+            }
         }
 
         $ref->{ 'cpu_count' }++;
         close($cpu);
+    }
+
+
+    #
+    #  Are we i386/amd64.  This shouldn't be necessary since the information
+    # should have been read from /proc/cpuinfo
+    #
+    if ( ! $ref->{'arch'} )
+    {
+        my $type = `file /bin/ls`;
+        if ( $type =~ /64-bit/i )
+        {
+            $ref->{ 'arch' } = "amd64";
+            $ref->{ 'bits' } = 64;
+        }
+        else
+        {
+            $ref->{ 'arch' } = "i386";
+            $ref->{ 'bits' } = 32;
+        }
     }
 
 
@@ -241,20 +275,6 @@ sub getInformation
     $ref->{ 'kernel' } = `uname -r`;
     chomp( $ref->{ 'kernel' } );
 
-    #
-    #  Are we i386/amd64?
-    #
-    my $type = `file /bin/ls`;
-    if ( $type =~ /64-bit/i )
-    {
-        $ref->{ 'arch' } = "amd64";
-        $ref->{ 'bits' } = 64;
-    }
-    else
-    {
-        $ref->{ 'arch' } = "i386";
-        $ref->{ 'bits' } = 32;
-    }
 
     #
     #  IP address(es).
