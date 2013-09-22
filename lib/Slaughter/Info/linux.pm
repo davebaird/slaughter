@@ -188,7 +188,7 @@ sub getInformation
             if ( $line =~ /flags\s+:(.*)/ )
             {
                 my $flags = $1;
-                if ( $flags =~/lm/ )
+                if ( $flags =~ /lm/ )
                 {
                     $ref->{ 'arch' } = "amd64";
                     $ref->{ 'bits' } = 64;
@@ -210,7 +210,7 @@ sub getInformation
     #  Are we i386/amd64.  This shouldn't be necessary since the information
     # should have been read from /proc/cpuinfo
     #
-    if ( ! $ref->{'arch'} )
+    if ( !$ref->{ 'arch' } )
     {
         my $type = `file /bin/ls`;
         if ( $type =~ /64-bit/i )
