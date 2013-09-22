@@ -790,8 +790,23 @@ sub FetchFile
     {
         if ( -e $dst )
         {
-            $::verbose && print "\tMoving existing file out of the way.\n";
-            RunCommand( Cmd => "mv $dst $dst.old" );
+
+            #
+            #  If we've been given "Backup" then we backup, otherwise
+            # we just remove the old file.
+            #
+            my $backup = $params{ 'Backup' } || "true";
+
+            if ( $backup =~ /true/i )
+            {
+                $::verbose && print "\tMoving existing file out of the way.\n";
+                RunCommand( Cmd => "mv $dst $dst.old" );
+            }
+            else
+            {
+                $::verbose &&
+                  print "\tOverwriting existing file without creating backup\n";
+            }
         }
 
 
