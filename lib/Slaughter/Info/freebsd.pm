@@ -28,8 +28,8 @@ Usage is:
     my $data = $obj->getInformation();
 
     # use info now ..
-    print "We have $data->{'ip_count'} IPv4 addresses.\n";o
-    print "We have $data->{'ip6_count'} IPv6 addresses.\n";o
+    print "We have $data->{'ip_count'} IPv4 addresses.\n";
+    print "We have $data->{'ip6_count'} IPv6 addresses.\n";
 
 =for example end
 
