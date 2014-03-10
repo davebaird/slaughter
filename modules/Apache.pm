@@ -65,6 +65,8 @@ the same terms as Perl itself.
 =cut
 
 
+use strict;
+
 
 use File::Basename qw! basename !;
 
@@ -276,7 +278,7 @@ Disable the given module.
 
 sub disable_module
 {
-    my ($self) = (@_);
+    my ( $self, $module ) = (@_);
 
     my @all = $self->_find_modules("/etc/apache2/mods-enabled/*.load");
     my @res;
