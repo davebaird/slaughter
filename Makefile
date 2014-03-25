@@ -10,6 +10,7 @@
 #  Only used to build distribution tarballs.
 #
 BASE        = slaughter
+TMP        ?= /tmp
 DIST_PREFIX = ${TMP}
 VERSION     = $(shell sh -c 'git describe --abbrev=0 --tags | tr -d "release-"')
 
@@ -85,7 +86,7 @@ uninstall:
 	rm -rf $(ETC_PREFIX)/slaughter
 
 
-release: tidy clean 
+release: tidy clean
 	rm -rf $(DIST_PREFIX)/$(BASE)-$(VERSION)
 	rm -f $(DIST_PREFIX)/$(BASE)-$(VERSION).tar.gz
 	cp -R . $(DIST_PREFIX)/$(BASE)-$(VERSION)
