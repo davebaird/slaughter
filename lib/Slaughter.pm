@@ -75,6 +75,10 @@ use strict;
 use warnings;
 
 
+#
+# The version of our release.
+#
+our $VERSION = "3.0.0";
 
 BEGIN
 {
@@ -115,6 +119,7 @@ BEGIN
         #
     }
 }
+
 
 
 1;
