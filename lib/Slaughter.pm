@@ -64,22 +64,10 @@ This allows you to keep develop your own custom-primitives.
 
 =cut
 
-=head1 AUTHOR
 
- Steve
- --
- http://www.steve.org.uk/
+=head1 METHODS
 
-=cut
-
-=head1 LICENSE
-
-Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
-
-This module is free software;
-you can redistribute it and/or modify it under
-the same terms as Perl itself.
-The LICENSE file contains the full text of the license.
+Now follows documentation on the available methods.
 
 =cut
 
@@ -136,3 +124,22 @@ BEGIN
 
 
 1;
+
+
+
+=head1 AUTHOR
+
+Steve Kemp <steve@steve.org.uk>
+
+=cut
+
+=head1 LICENSE
+
+Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
+
+This module is free software;
+you can redistribute it and/or modify it under
+the same terms as Perl itself.
+The LICENSE file contains the full text of the license.
+
+=cut
