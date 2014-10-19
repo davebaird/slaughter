@@ -515,8 +515,6 @@ The return value will depend on the matching:
 
 1  The files are identical.
 
-=back
-
 =cut
 
 sub IdenticalContents
@@ -660,12 +658,7 @@ To the following, assuming the local host is called "precious.my.flat":
 The return value of this function is will depend upon the
 action carried out:
 
-=over 8
-
-=item -1
-
-Returned on error; either missing parameters, or failure to perform
-the fetch.
+-1 - Returned on error; either missing parameters, or failure to perform the fetch.
 
 0 - The fetch resulted in no change.
 
