@@ -58,7 +58,6 @@ t/slaughter-api-text-tests.t
 t/slaughter-api-user-tests.t
 t/style-no-tabs.t
 t/style-no-trailing-whitespace.t
-t/test-config-module.t
 t/test-dependencies.t
 t/test-digest-sha-module.t
 t/test-lib-slaughter-info.t
