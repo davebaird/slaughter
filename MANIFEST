@@ -1,7 +1,6 @@
 AUTHORS
 bin/slaughter
 ChangeLog
-doap.rdf
 examples/basic/policies/default.policy
 examples/basic/README
 examples/complex/files/etc/motd.debian-administration.org
@@ -44,6 +43,7 @@ lib/Slaughter/Transport/mojo.pm
 lib/Slaughter/Transport/revisionControl.pm
 lib/Slaughter/Transport/rsync.pm
 lib/Slaughter/Transport/svn.pm
+LICENSE
 Makefile.PL
 MANIFEST			This list of files
 MANIFEST.SKIP
