@@ -103,6 +103,11 @@ use warnings;
 
 package Slaughter::Transport::revisionControl;
 
+#
+# The version of our release.
+#
+our $VERSION = "3.0.3";
+
 
 
 
@@ -111,7 +116,7 @@ package Slaughter::Transport::revisionControl;
 Create a new instance of this object.
 
 This constructor calls the "C<_init>" method of any derived class, if present,
-which is where we'll expect the setup menioned in L</SUBCLASSING> to take place.
+which is where we'll expect the setup mentioned in L</SUBCLASSING> to take place.
 
 =cut
 
@@ -240,8 +245,9 @@ sub name
 
 Clone the repository.
 
-This is called only once, when the object is constructed.  It will be called by slaughter, for
-example, to clone the repository prior to processing policies.
+This is called only once, when the object is constructed.  It will be
+called by slaughter, for example, to clone the repository prior to
+processing policies.
 
 =end doc
 

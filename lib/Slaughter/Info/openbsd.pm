@@ -2,7 +2,7 @@
 
 =head1 NAME
 
-Slaughter::Info::openbsd - Perl Automation Tool Helper OpenBSD info implementation
+Slaughter::Info::openbsd - Determine information about an OpenBSD host.
 
 =cut
 
@@ -18,7 +18,17 @@ the current host.
 This module is loaded only on OpenBSD systems, and will determine such details
 as the local hostname, the free RAM, any IP addresses, etc.
 
-Usage is:
+The correct information-gathering module is loaded at run-time via the use of the C<$^O> variable, and if no system-specific module is available then the generic L<Slaughter::Info::generic> module is used as a fall-back.
+
+The information discovered can be dumped by running C<slaughter>
+
+=for example begin
+
+      ~# slaughter --dump
+
+=for example end
+
+Usage of this module is as follows:
 
 =for example begin
 
@@ -41,22 +51,9 @@ policies.
 =cut
 
 
-=head1 AUTHOR
+=head1 METHODS
 
- Steve
- --
- http://www.steve.org.uk/
-
-=cut
-
-=head1 LICENSE
-
-Copyright (c) 2010-2012 by Steve Kemp.  All rights reserved.
-
-This module is free software;
-you can redistribute it and/or modify it under
-the same terms as Perl itself.
-The LICENSE file contains the full text of the license.
+Now follows documentation on the available methods.
 
 =cut
 
@@ -67,6 +64,12 @@ use warnings;
 
 package Slaughter::Info::openbsd;
 
+
+
+#
+# The version of our release.
+#
+our $VERSION = "3.0.3";
 
 
 
@@ -207,3 +210,22 @@ sub getInformation
 
 
 1;
+
+
+
+=head1 AUTHOR
+
+Steve Kemp <steve@steve.org.uk>
+
+=cut
+
+=head1 LICENSE
+
+Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
+
+This module is free software;
+you can redistribute it and/or modify it under
+the same terms as Perl itself.
+The LICENSE file contains the full text of the license.
+
+=cut

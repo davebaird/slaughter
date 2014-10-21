@@ -17,23 +17,9 @@ without needing an OO-interface.
 
 =cut
 
+=head1 METHODS
 
-=head1 AUTHOR
-
- Steve
- --
- http://www.steve.org.uk/
-
-=cut
-
-=head1 LICENSE
-
-Copyright (c) 2010-2012 by Steve Kemp.  All rights reserved.
-
-This module is free software;
-you can redistribute it and/or modify it under
-the same terms as Perl itself.
-The LICENSE file contains the full text of the license.
+Now follows documentation on the available methods.
 
 =cut
 
@@ -61,14 +47,15 @@ use Text::Template;
 #
 use Slaughter::Private;
 
+#
+# The version of our release.
+#
+our $VERSION = "3.0.3";
 
-=begin doc
+
+=head2 import
 
 Export all subs in this package into the main namespace.
-
-This is nasty.
-
-=end doc
 
 =cut
 
@@ -550,8 +537,8 @@ sub IdenticalContents
     #
     #  Same hash?
     #
-    my $sum_a = checksumFile($a);
-    my $sum_b = checksumFile($b);
+    my $sum_a = Slaughter::Private::checksumFile($a);
+    my $sum_b = Slaughter::Private::checksumFile($b);
     return 0 if ( $sum_a ne $sum_b );
 
     #
@@ -684,7 +671,7 @@ sub FetchFile
     #
     #  Fetch the source.
     #
-    my $content = fetchFromTransport($src);
+    my $content = Slaughter::Private::fetchFromTransport($src);
 
     if ( !defined($content) )
     {
@@ -746,8 +733,8 @@ sub FetchFile
     }
     else
     {
-        my $cur = checksumFile($dst);
-        my $new = checksumFile($name);
+        my $cur = Slaughter::Private::checksumFile($dst);
+        my $new = Slaughter::Private::checksumFile($name);
 
         if ( $new ne $cur )
         {
@@ -1654,5 +1641,23 @@ sub UserCreate
 
 
 
-
 1;
+
+
+
+=head1 AUTHOR
+
+Steve Kemp <steve@steve.org.uk>
+
+=cut
+
+=head1 LICENSE
+
+Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
+
+This module is free software;
+you can redistribute it and/or modify it under
+the same terms as Perl itself.
+The LICENSE file contains the full text of the license.
+
+=cut

@@ -11,7 +11,7 @@ This transport copes with cloning a remote Mercurial repository to the local fil
 
 =head1 DESCRIPTION
 
-This module uses the C<Slaughter::Transport::revisionControl> base-class in such
+This module uses the L<Slaughter::Transport::revisionControl> base-class in such
 a way as to offer a Mercurial-based transport.
 
 All the implementation, except for the setup of some variables, comes from that
@@ -45,26 +45,6 @@ This is set to "C<hg>".
 
 =cut
 
-=head1 AUTHOR
-
- Steve
- --
- http://www.steve.org.uk/
-
-=cut
-
-=head1 LICENSE
-
-Copyright (c) 2012 by Steve Kemp.  All rights reserved.
-
-This module is free software;
-you can redistribute it and/or modify it under
-the same terms as Perl itself.
-The LICENSE file contains the full text of the license.
-
-=cut
-
-
 
 use strict;
 use warnings;
@@ -72,6 +52,12 @@ use warnings;
 
 
 package Slaughter::Transport::hg;
+
+#
+# The version of our release.
+#
+our $VERSION = "3.0.3";
+
 
 use parent 'Slaughter::Transport::revisionControl';
 
@@ -130,3 +116,21 @@ sub _init
 
 
 1;
+
+
+=head1 AUTHOR
+
+Steve Kemp <steve@steve.org.uk>
+
+=cut
+
+=head1 LICENSE
+
+Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
+
+This module is free software;
+you can redistribute it and/or modify it under
+the same terms as Perl itself.
+The LICENSE file contains the full text of the license.
+
+=cut
