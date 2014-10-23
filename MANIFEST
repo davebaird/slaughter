@@ -17,19 +17,16 @@ examples/file-copy/policies/default.policy
 examples/file-copy/README
 HACKING
 lib/Slaughter.pm
-lib/Slaughter/API/API
 lib/Slaughter/API/freebsd.pm
 lib/Slaughter/API/generic.pm
 lib/Slaughter/API/linux.pm
 lib/Slaughter/API/MSWin32.pm
 lib/Slaughter/API/openbsd.pm
-lib/Slaughter/Info/API
 lib/Slaughter/Info/freebsd.pm
 lib/Slaughter/Info/generic.pm
 lib/Slaughter/Info/linux.pm
 lib/Slaughter/Info/MSWin32.pm
 lib/Slaughter/Info/openbsd.pm
-lib/Slaughter/Packages/API
 lib/Slaughter/Packages/freebsd.pm
 lib/Slaughter/Packages/linux.pm
 lib/Slaughter/Packages/openbsd.pm
@@ -52,7 +49,6 @@ t/perl-syntax.t
 t/sample-code.t
 t/slaughter-api-file-tests.t
 t/slaughter-api-misc-tests.t
-t/slaughter-api-sanity.t
 t/slaughter-api-shell-tests.t
 t/slaughter-api-text-tests.t
 t/slaughter-api-user-tests.t
