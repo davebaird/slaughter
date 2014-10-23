@@ -537,8 +537,8 @@ sub IdenticalContents
     #
     #  Same hash?
     #
-    my $sum_a = checksumFile($a);
-    my $sum_b = checksumFile($b);
+    my $sum_a = Slaughter::Private::checksumFile($a);
+    my $sum_b = Slaughter::Private::checksumFile($b);
     return 0 if ( $sum_a ne $sum_b );
 
     #
@@ -671,7 +671,7 @@ sub FetchFile
     #
     #  Fetch the source.
     #
-    my $content = fetchFromTransport($src);
+    my $content = Slaughter::Private::fetchFromTransport($src);
 
     if ( !defined($content) )
     {
@@ -733,8 +733,8 @@ sub FetchFile
     }
     else
     {
-        my $cur = checksumFile($dst);
-        my $new = checksumFile($name);
+        my $cur = Slaughter::Private::checksumFile($dst);
+        my $new = Slaughter::Private::checksumFile($name);
 
         if ( $new ne $cur )
         {
