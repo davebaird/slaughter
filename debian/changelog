@@ -1,3 +1,11 @@
+slaughter2 (3.0.4-1) stable; urgency=low
+
+  * New release:
+    - A lock prevents multiple overlapping runs.
+    - The code has moved to CPAN.
+
+ -- Steve Kemp <steve@steve.org.uk>  Wed, 29 Oct 2014 08:18:28 +0000
+
 slaughter2 (2.8-1) stable; urgency=low
 
   * New release:

@@ -1,25 +1,28 @@
+Format-Specification: http://anonscm.debian.org/viewvc/dep/web/deps/dep5.mdwn?view=markup&pathrev=135
+Maintainer: Steve Kemp <steve@steve.org.uk>
+Source: http://search.cpan.org/dist/App-Slaughter/
+Name: App-Slaughter
 
-This package was debianized by Steve Kemp <steve@steve.org.uk> on
-Saturday, 16th January 2010
+Files: *
+Copyright: Steve Kemp <steve@steve.org.uk>
+License: Artistic
 
-It was downloaded from http://www.steve.org.uk/Software/slaughter/
+Files: debian/*
+Copyright: 2014, Steve Kemp <skx@shelob.my.flat>
+License: GPL-1+ or Artistic
 
-Copyright 2010 Steve Kemp <steve@steve.org.uk>
+License: GPL-1+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 1, or (at your option)
+ any later version.
+ .
+ On Debian systems, the complete text of version 1 of the GNU General
+ Public License can be found in `/usr/share/common-licenses/GPL-1'.
 
-License:
-
-This program is free software, you can redistribute it and/or modify it under
-the same terms as Perl itself.
-
-Perl is distributed under licenses:
-
-    a) the GNU General Public License as published by the Free Software
-       Foundation; either version 1, or (at your option) any later
-       version, or
-
-    b) the "Artistic License" which comes with Perl.
-
-    On Debian GNU/Linux systems, the complete text of the GNU General
-    Public License can be found in /usr/share/common-licenses/GPL' and
-    the Artistic Licence in /usr/share/common-licenses/Artistic'.
-
+License: Artistic
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the Artistic License, which comes with Perl.
+ .
+ On Debian systems, the complete text of the Artistic License can be
+ found in `/usr/share/common-licenses/Artistic'.
