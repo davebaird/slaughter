@@ -1,0 +1,2 @@
+version=3
+http://search.cpan.org/dist/App-Slaughter/   .*/App-Slaughter-v?(\d[\d.-]+)\.(?:tar(?:\.gz|\.bz2)?|tgz|zip)$
