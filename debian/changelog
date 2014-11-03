@@ -1,8 +1,42 @@
+slaughter2 (3.0.4-2) stable; urgency=low
+
+  * Update just for Debian.
+    - The slaughter binary was moved to /usr/bin, add symlink to /sbin
+    for compatibilty.
+    - Add missing ChangeLog entries.
+
+ -- Steve Kemp <steve@steve.org.uk>  Mon, 3 Nov 2014 17:18:19 +0000
+
 slaughter2 (3.0.4-1) stable; urgency=low
 
   * New release:
     - A lock prevents multiple overlapping runs.
-    - The code has moved to CPAN.
+    - The code has moved to CPAN
+
+ -- Steve Kemp <steve@steve.org.uk>  Wed, 29 Oct 2014 08:18:28 +0000
+
+slaughter2 (3.0.3-1) stable; urgency=low
+
+  * New release:
+    - Updated POD.
+
+ -- Steve Kemp <steve@steve.org.uk>  Wed, 29 Oct 2014 08:18:28 +0000
+
+slaughter2 (3.0.2-1) stable; urgency=low
+
+  * New release:
+    - Minor changes to Slaughter::Private module to make it a real module.
+    - Added version number in our modules.
+
+ -- Steve Kemp <steve@steve.org.uk>  Wed, 29 Oct 2014 08:18:28 +0000
+
+slaughter2 (3.0.1-1) stable; urgency=low
+
+  * New release:
+    - Fail cleanly if the transport isn't loaded.
+    - Removed sample Apache module.
+    - Minor POD updates to fix warnings/errors.
+    - Add Mojo::UserAgent as explicit dependency.
 
  -- Steve Kemp <steve@steve.org.uk>  Wed, 29 Oct 2014 08:18:28 +0000
 
