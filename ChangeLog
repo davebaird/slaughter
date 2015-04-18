@@ -1,4 +1,7 @@
 
+3.0.5 - 18th April 2015
+    * Add "App::Slaughter" module to claim the CPAN namespace.
+
 3.0.4 - 28th October 2014
     * Prevent multiple simultaneous runs.
 

@@ -50,7 +50,7 @@ use Slaughter::Private;
 #
 # The version of our release.
 #
-our $VERSION = "3.0.4";
+our $VERSION = "3.0.5";
 
 
 =head2 import
@@ -1653,7 +1653,7 @@ Steve Kemp <steve@steve.org.uk>
 
 =head1 LICENSE
 
-Copyright (c) 2010-2014 by Steve Kemp.  All rights reserved.
+Copyright (c) 2010-2015 by Steve Kemp.  All rights reserved.
 
 This module is free software;
 you can redistribute it and/or modify it under

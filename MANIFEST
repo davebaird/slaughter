@@ -16,6 +16,7 @@ examples/file-copy/files/etc/motd
 examples/file-copy/policies/default.policy
 examples/file-copy/README
 HACKING
+lib/App/Slaughter.pm
 lib/Slaughter.pm
 lib/Slaughter/API/freebsd.pm
 lib/Slaughter/API/generic.pm
