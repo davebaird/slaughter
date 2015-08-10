@@ -40,7 +40,7 @@ Overview
 
 We assume that we have a "server" somewhere.  This server is designed to allow files, modules, and policies to be retrieved from it.
 
-The actual form of the server loosely specified, as slaughter allows different transport mechanisms to be used.  Currently there are several supported transports for fetching things from the remote server:
+The actual form of the server is loosely specified, as slaughter allows different transport mechanisms to be used.  Currently there are several supported transports for fetching things from the remote server:
 
 * HTTP-transfers.
 * rsync-transfers.
@@ -100,7 +100,7 @@ You'll probably want to invoke slaughter manually for the first few times as you
 Server Layout
 -------------
 
-Regardless of the transport which is in use, and examples are available in the included TRANSPORT file, slaughter does insist that the top-level of the server contain the some fixed subdirectories.
+Regardless of the transport which is in use, and examples are available in the included TRANSPORT file, slaughter does insist that the top-level of the server contain the same fixed subdirectories.
 
 For example using the HTTP-transport the webserver should be configured to serve a tree which would look like this:
 
