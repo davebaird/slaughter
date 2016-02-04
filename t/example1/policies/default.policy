@@ -1,0 +1,8 @@
+
+my $global_thing = 'useful everywhere';
+
+FetchModule("Foo.pm");          # the foo module
+FetchModule("Bar.pm");
+
+FetchPolicy("foo.policy");      # the foo policy
+FetchPolicy("bar.policy");

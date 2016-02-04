@@ -11,10 +11,7 @@ slaughter - Perl Automation Tool
   General Options:
 
    --delay         Delay for up to N seconds prior to launching.   Useful if you have a lot of clients.
-   --dump          Dump details of the local environment, and immediately exit.
    --mail          Email the output of any LogMessages to the given address.
-   --no-delete     Don't delete the compiled perl post-execution.
-   --no-execute    Don't actually execute the downloaded policy.
    --role          Specify a role for this host, useful for policy writers.
    --transports    Dump the names of all available transports.
    --include       Include the specified file in our wrapper content.
@@ -26,6 +23,19 @@ slaughter - Perl Automation Tool
    --username       The username for the policy-fetch, if appropriate (http-only).
    --password       The password for the policy-fetch, if appropriate (http-only).
    --transport-args Any arguments to pass to the transport (used for rsync/hg/git/svn).
+
+  Developing and debugging policies. Note that none of these settings should be
+        used on the target hosts.
+
+   --dump          Dump details of the local environment, and immediately exit.
+   --no-delete     Don't delete the compiled perl post-execution.
+   --no-execute    Don't actually execute the downloaded policy.
+   --skip-cfgfile  Don't read the config file.
+   --allow-nonroot Allow non-root users (also sets --no-execute).
+   --outfile       Write the generated script to this file (also sets --no-delete).
+   --lockfile      Specify the lockfile to use (useful with --allow-nonroot).
+   --fqdn          Spoof the fqdn.
+   --hostname      Spoof the hostname.
 
   Help Options:
 
@@ -141,6 +151,24 @@ may be executed interactively to see what is going on.
 You may also invoke slaughter with the C<--dump> flag which will cause
 it to display the environmental details it has discovered, and which will
 be compiled into the policy prior to execution.
+
+The C<--allow-nonroot> flag permits unprivileged users to run
+C<slaughter> and generate the update script. It doesn't allow them to run the
+generated script. This flag also sets the C<--no-execute> flag.
+
+You can use C<--role>, C<--hostname> and C<--fqdn> options to spoof particular
+environments and check the generated update script before deploying.
+
+You can set C<--outfile> to capture the generated script, instead of sending it
+to a randomly named tmpfile. This will also set the C<--no-delete> flag for you.
+
+For example:
+
+    slaughter --verbose --skip-cfgfile --allow-nonroot --lockfile=/tmp/slaug.lck \
+        --transport=local --prefix=/path/to/my/slaughter-policies \
+        --role=mailserver --hostname=smtp --fqdn=smtp.example.com \
+        --outfile=GENERATED.pl
+
 
 =cut
 
@@ -377,6 +405,8 @@ sub defaultOptions
                  transportargs => '',
                  nodelete      => 0,
                  noexecute     => 0,
+                 allownonroot => 0,
+                 skipcfgfile  => 0,
                  delay         => -1,
                );
 
@@ -548,6 +578,8 @@ sub parseConfigurationFile
 {
     my $config = undef;
 
+    return if $CONFIG{ 'skipcfgfile' };
+
     #
     #  Try each of the configuration files in turn.
     #
@@ -653,10 +685,15 @@ sub parseCommandLine
             "delay=i",    \$CONFIG{ 'delay' },
             "lockfile=s", \$CONFIG{ 'lockfile' },
             "role=s",     \$CONFIG{ 'role' },
+            "fqdn=s",     \$CONFIG{ 'fqdn' },
+            "hostname=s", \$CONFIG{ 'hostname' },
+            "outfile=s",  \$CONFIG{ 'outfile' },
             "transports", \$CONFIG{ 'transports' },
             "no-delete",  \$CONFIG{ 'nodelete' },
             "no-execute", \$CONFIG{ 'noexecute' },
             "verbose",    \$CONFIG{ 'verbose' },
+            "skip-cfgfile",  \$CONFIG{ 'skipcfgfile' },
+            "allow-nonroot", \$CONFIG{ 'allownonroot' },
         ) )
     {
         exit 1;
@@ -665,6 +702,21 @@ sub parseCommandLine
     pod2usage(1) if $SHOW_HELP;
     pod2usage( -verbose => 2 ) if $SHOW_MANUAL;
 
+    #
+    #  Don't bother trying to execute the generated script if we're allowing non-root
+    #
+    if ( $CONFIG{ 'allownonroot' } )
+    {
+        $CONFIG{ 'noexecute' } ||= 1;
+    }
+
+    #
+    # Don't delete the output file if it was specified on the command line
+    #
+    if ( $CONFIG{ 'outfile' } )
+    {
+        $CONFIG{ 'nodelete' } ||= 1;
+    }
 
     #
     #  Showing the version number only?
@@ -792,7 +844,7 @@ configuration file settings, and the local user.
 
 sub testEnvironment
 {
-    if ( $UID != 0 )
+    if ( $UID != 0 and ! $CONFIG{ 'allownonroot' })
     {
         print <<EOF;
 You must launch this command as root.
@@ -976,7 +1028,10 @@ sub loadPolicy
         # Skip blank lines
         next if ( length($line) < 1 );
 
-        if ( $line =~ /^([ \t]*)FetchPolicy(.*);*/ )
+        # Strip comments on end of line
+        $line =~ s/#.*$//;
+
+        if ( $line =~ /^([ \t]*)FetchPolicy(.*);\s*/ )
         {
             $::CONFIG{ 'verbose' } && print "Policy inclusion: $line\n";
 
@@ -1014,15 +1069,15 @@ sub loadPolicy
                                       file   => $include );
             if ($txt)
             {
-                $line = "# Policy inclusion - $include\n";
-                $line .= $txt;
+                $line = "{\n" . "# Policy inclusion - $include\n";
+                $line .= $txt . "}\n";
             }
             else
             {
                 $line = "# Policy inclusion failed - $include\n";
             }
         }
-        if ( $line =~ /^([ \t]*)FetchModule(.*);*/ )
+        if ( $line =~ /^([ \t]*)FetchModule(.*);\s*/ )
         {
             $::CONFIG{ 'verbose' } && print "Module inclusion: $line\n";
 
@@ -1040,8 +1095,8 @@ sub loadPolicy
                                       file   => $include );
             if ($tmp)
             {
-                $modules .= "\n# Module inclusion - $include\n";
-                $modules .= $tmp;
+                $modules .= "\n{\n" . "\n# Module inclusion - $include\n";
+                $modules .= $tmp . "}\n";
                 $line = "";
             }
             else
@@ -1083,6 +1138,7 @@ sub writeoutPolicy
     # it to something restrictive.
     #
     my ( undef, $name ) = File::Temp::tempfile();
+    $name = $CONFIG{ 'outfile' } if $CONFIG{ 'outfile' };
     if ( $^O ne "MSWin32" )
     {
         chmod( 0700, $name );
