@@ -637,6 +637,9 @@ sub parseConfigurationFile
             $val =~ s/^\s+//;
             $val =~ s/\s+$//;
 
+            # strip dashes in variable name
+            $key =~ s/-//g;
+
             # Store value.
             $CONFIG{ $key } = $val;
         }
