@@ -541,7 +541,10 @@ sub loadInfo
     eval("use $module");
     ## use critic
 
-    if ( !$@ )
+    if ($@) {
+        warn "Error loading info module $module: $@";
+    }
+    else
     {
 
         #
@@ -1073,7 +1076,10 @@ sub loadPolicy
             if ($txt)
             {
                 $line = "{\n" . "# Policy inclusion - $include\n";
-                $line .= $txt . "}\n";
+                $line .= "print '>>>>> Running policy: ---------------------- $include\n';\n" if $::CONFIG{verbose};
+                $line .= $txt;
+                $line .= "print '<<<<< Completed policy: -------------------- $include\n';\n" if $::CONFIG{verbose};
+                $line .= "}\n";
             }
             else
             {
