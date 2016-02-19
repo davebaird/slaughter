@@ -51,6 +51,7 @@ t/slaughter-api-misc-tests.t
 t/slaughter-api-shell-tests.t
 t/slaughter-api-text-tests.t
 t/slaughter-api-user-tests.t
+t/test-bin-slaughter.t
 t/style-no-tabs.t
 t/test-dependencies.t
 t/test-digest-sha-module.t
@@ -59,4 +60,9 @@ t/test-lib-slaughter-packages.t
 t/test-lib-slaughter-transport.t
 t/test-pod-syntax.t
 t/test-text-template-module.t
+t/example1/policies/foo.policy
+t/example1/policies/bar.policy
+t/example1/modules/Foo.pm
+t/example1/modules/Bar.pm
+
 TRANSPORTS

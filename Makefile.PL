@@ -18,19 +18,23 @@ my %WriteMakefileArgs = (
         'File::Spec'      => 0,
         'File::Temp'      => 0,
         'Getopt::Long'    => 0,
-        'LWP::UserAgent'  => 0,
         'Pod::Usage'      => 0,
-        "Pod::Usage"      => 0,
         "POSIX"           => 0,
+
+        # non-core modules
+        'LWP::UserAgent'  => 0,
         "Text::Template"  => 0,
         "Mojo::UserAgent" => 0,
-
+        },
+    TEST_REQUIRES => {
         # solely for the test-suite.
         'Test::More'   => 0,
         'Test::Pod'    => 0,
         'Test::Strict' => 0,
         'Test::NoTabs' => 0,
-
+        'Test::Script' => 0,
+        'Test::File::Contents' => 0,
+        'Capture::Tiny' => 0,
                  },
     ABSTRACT => 'The Slaughter System Administration Utility.',
     AUTHOR   => 'Steve Kemp <steve@steve.org.uk>',

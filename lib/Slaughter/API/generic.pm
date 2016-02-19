@@ -297,16 +297,20 @@ sub CommentLinesMatching
                 }
                 close($handle);
 
+                $::verbose && print "Commented $found lines matching $pattern in $file\n";
+
                 return $found;
             }
         }
         else
         {
+            $::verbose && print "No lines matching $pattern found in $file\n";
             return 0;
         }
     }
     else
     {
+        $::verbose && print "Couldn't open $file to check for $pattern\n";
         return -1;
     }
 }
