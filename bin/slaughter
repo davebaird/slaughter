@@ -405,8 +405,8 @@ sub defaultOptions
                  transportargs => '',
                  nodelete      => 0,
                  noexecute     => 0,
-                 allownonroot => 0,
-                 skipcfgfile  => 0,
+                 allownonroot  => 0,
+                 skipcfgfile   => 0,
                  delay         => -1,
                );
 
@@ -541,7 +541,8 @@ sub loadInfo
     eval("use $module");
     ## use critic
 
-    if ($@) {
+    if ($@)
+    {
         warn "Error loading info module $module: $@";
     }
     else
@@ -686,18 +687,18 @@ sub parseCommandLine
             "include=s", \$CONFIG{ 'include' },
 
             # Flags
-            "mail",       \$CONFIG{ 'mail' },
-            "dump",       \$CONFIG{ 'dump' },
-            "delay=i",    \$CONFIG{ 'delay' },
-            "lockfile=s", \$CONFIG{ 'lockfile' },
-            "role=s",     \$CONFIG{ 'role' },
-            "fqdn=s",     \$CONFIG{ 'fqdn' },
-            "hostname=s", \$CONFIG{ 'hostname' },
-            "outfile=s",  \$CONFIG{ 'outfile' },
-            "transports", \$CONFIG{ 'transports' },
-            "no-delete",  \$CONFIG{ 'nodelete' },
-            "no-execute", \$CONFIG{ 'noexecute' },
-            "verbose",    \$CONFIG{ 'verbose' },
+            "mail",          \$CONFIG{ 'mail' },
+            "dump",          \$CONFIG{ 'dump' },
+            "delay=i",       \$CONFIG{ 'delay' },
+            "lockfile=s",    \$CONFIG{ 'lockfile' },
+            "role=s",        \$CONFIG{ 'role' },
+            "fqdn=s",        \$CONFIG{ 'fqdn' },
+            "hostname=s",    \$CONFIG{ 'hostname' },
+            "outfile=s",     \$CONFIG{ 'outfile' },
+            "transports",    \$CONFIG{ 'transports' },
+            "no-delete",     \$CONFIG{ 'nodelete' },
+            "no-execute",    \$CONFIG{ 'noexecute' },
+            "verbose",       \$CONFIG{ 'verbose' },
             "skip-cfgfile",  \$CONFIG{ 'skipcfgfile' },
             "allow-nonroot", \$CONFIG{ 'allownonroot' },
         ) )
@@ -850,7 +851,7 @@ configuration file settings, and the local user.
 
 sub testEnvironment
 {
-    if ( $UID != 0 and ! $CONFIG{ 'allownonroot' })
+    if ( $UID != 0 and !$CONFIG{ 'allownonroot' } )
     {
         print <<EOF;
 You must launch this command as root.
@@ -1076,9 +1077,13 @@ sub loadPolicy
             if ($txt)
             {
                 $line = "{\n" . "# Policy inclusion - $include\n";
-                $line .= "print '>>>>> Running policy: ---------------------- $include\n';\n" if $::CONFIG{verbose};
+                $line .=
+                  "print '>>>>> Running policy: ---------------------- $include\n';\n"
+                  if $::CONFIG{ verbose };
                 $line .= $txt;
-                $line .= "print '<<<<< Completed policy: -------------------- $include\n';\n" if $::CONFIG{verbose};
+                $line .=
+                  "print '<<<<< Completed policy: -------------------- $include\n';\n"
+                  if $::CONFIG{ verbose };
                 $line .= "}\n";
             }
             else

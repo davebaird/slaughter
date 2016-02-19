@@ -297,7 +297,8 @@ sub CommentLinesMatching
                 }
                 close($handle);
 
-                $::verbose && print "Commented $found lines matching $pattern in $file\n";
+                $::verbose &&
+                  print "Commented $found lines matching $pattern in $file\n";
 
                 return $found;
             }
@@ -943,7 +944,7 @@ sub FindBinary
     my $binary = $params{ 'Binary' } || $params{ 'binary' } || return;
     my $path = $params{ 'Path' } ||
       $params{ 'path' } ||
-      $ENV{ 'PATH' } ||
+      $ENV{ 'PATH' }    ||
       "/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin";
     my $result = undef;
 
@@ -1426,7 +1427,8 @@ sub SetPermissions
         my ( $dev,      $ino,     $mode, $nlink, $orig_uid,
              $orig_gid, $rdev,    $size, $atime, $mtime,
              $ctime,    $blksize, $blocks
-           ) = stat($file);
+           )
+          = stat($file);
 
         $::verbose && print "\tSetting owner to $owner/$uid\n";
         chown( $uid, $orig_gid, $file );
@@ -1443,7 +1445,8 @@ sub SetPermissions
         my ( $dev,      $ino,     $mode, $nlink, $orig_uid,
              $orig_gid, $rdev,    $size, $atime, $mtime,
              $ctime,    $blksize, $blocks
-           ) = stat($file);
+           )
+          = stat($file);
 
         $::verbose && print "\tSetting group to $group/$gid\n";
         chown( $orig_uid, $gid, $file );
@@ -1547,7 +1550,8 @@ sub UserDetails
     #
     #  Return the values as a hash
     #
-    return ( { Home    => $home,
+    return (
+             { Home    => $home,
                UID     => $uid,
                GID     => $gid,
                Quota   => $quota,
