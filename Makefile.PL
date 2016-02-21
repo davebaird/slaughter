@@ -33,6 +33,7 @@ my %WriteMakefileArgs = (
         'Test::Strict' => 0,
         'Test::NoTabs' => 0,
         'Test::Script' => 0,
+        'Test::Exception' => 0,
         'Test::File::Contents' => 0,
         'Capture::Tiny' => 0,
                  },
